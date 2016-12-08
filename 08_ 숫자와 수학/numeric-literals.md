@@ -29,7 +29,7 @@ console.log(071); // Uncaught SyntaxError: Octal literals are not allowed in str
 ```
 ES5의 strict mode에서는 8진수 리터럴이 적용되지 않습니다.  
 왜냐하면 ES5에는 8진수 문법이 존재하지 않기 때문입니다.  
-그럼에도 불구하고 브라우저 사들은 비표준 요소인 8진수 리터럴을 지원하게끔 구현하였습니다.  
+그럼에도 불구하고 브라우저 벤더들은 비표준 요소인 8진수 리터럴을 지원하게끔 구현하였습니다.  
 따라서 strict mode에 따라서 8진수 리터럴의 사용 가능 여부가 달려있습니다.
 
 [MDN Strict mode](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Strict_mode#엄격한_모드_변경)  
