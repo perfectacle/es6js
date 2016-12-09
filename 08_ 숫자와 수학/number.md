@@ -107,9 +107,22 @@ new Number(11.1).toString(); // 11.1
 2. Number.MIN_SAFE_INTEGER  
 3. Number.MAX_SAFE_INTEGER  
 4. Number.prototype  
-  1. Number.prototype.toExponential()
-  2. Number.prototype.toPrecision()
-  3. Number.prototype.toFixed()
+  1. Number.prototype.toExponential()  
+  2. Number.prototype.toPrecision()  
+  3. Number.prototype.toFixed()  
+  4. Number.prototype.toLocaleString()  
+  5. Number.prototype.toString()  
+  6. Number.prototype.valueOf()
+  
+래퍼 객체의 표준 프로퍼티들은 상수이다.  
+즉 변경이 불가능하다.
+변경이 불가능하기 때문에 폴리필이 존재하지 않는다.
+```javascript
+Number.EPSILON = "asdf"; // 오류는 나지 않는다.
+console.log(Number.EPSILON); // 2.220446049250313e-16
+Number.prototype = "qq"; // 역시 오류는 나지 않는다.
+console.log(123 .toString()); // "123"
+```
 
 ##### Number.EPSILON
 ```javascript
@@ -175,7 +188,243 @@ console.log(Number.MAX_SAFE_INTEGER + 1 === Number.MAX_SAFE_INTEGER + 2); // tru
 ```
 
 ##### Number.prototype
-###### Number.prototype.toExponential
+숫자가 상속받는 프로퍼티와 메소들을 정의해놓은 프로퍼티이다.  
+표준 메소드 및 프로퍼티가 미리 정의돼있으며, 사용자가 직접 정의하려면 아래와 같이 하면 된다. 
+```javascript
+Number.prototype.lastNum = function() {
+  return this % 10;
+};
+console.log(12.0.lastNum()); // 2
+```
+
+#### Methods
+1. Number.isFinite()  
+2. Number.isInteger()  
+3. Number.isNaN()  
+4. Number.isSafeInteger()  
+5. Number.parseInt()  
+6. Number.parseFloat()  
+7. Number.prototype.toExponential()  
+8. Number.prototype.toPrecision()  
+9. Number.prototype.toFixed()  
+10. Number.prototype.toLocaleString()  
+11. Number.prototype.toString()  
+12. Number.prototype.valueOf()
+
+래퍼 객체의 메소드는 수정 가능하다.
+수정 가능하기 때문에 폴리필도 제작 가능하다.
+```javascript
+Number.isFinite = () => "a";
+console.log(Number.isFinite(123)); // "a"
+
+Number.prototype.toExponential = function() {
+  return this * this;
+}
+console.log(11 .toExponential()); // 121
+```
+
+##### Number.isFinite()
+###### in ES
+```javascript
+console.log(isFinite(0)); // true
+console.log(isFinite(255)); // true
+console.log(isFinite(-254)); // true
+console.log(isFinite("1")); // true
+console.log(isFinite(NaN)); // false
+console.log(isFinite(Infinity)); // false
+console.log(isFinite(-Infinity)); // false
+console.log(isFinite(null)); // true
+console.log(isFinite({})); // false
+console.log(isFinite(undefined)); // false
+console.log(isFinite([])); // true
+```
+
+###### in ES6
+```javascript
+console.log(Number.isFinite(0)); // true
+console.log(Number.isFinite(255)); // true
+console.log(Number.isFinite(-254)); // true
+console.log(Number.isFinite("1")); // false
+console.log(Number.isFinite(NaN)); // false
+console.log(Number.isFinite(Infinity)); // false
+console.log(Number.isFinite(-Infinity)); // false
+console.log(Number.isFinite(null)); // false
+console.log(Number.isFinite({})); // false
+console.log(Number.isFinite(undefined)); // false
+console.log(Number.isFinite([])); // false
+```
+
+###### Polyfill
+```javascript
+Number.isFinite = Number.isFinite || function(value) {
+    return typeof value === "number" && isFinite(value);
+}
+```
+
+##### Number.isInteger()
+```javascript
+console.log(Number.isInteger(0)); // true
+console.log(Number.isInteger(255)); // true
+console.log(Number.isInteger(-254)); // true
+console.log(Number.isInteger(1.1)); // false
+console.log(Number.isInteger("1")); // false
+console.log(Number.isInteger(NaN)); // false
+console.log(Number.isInteger(Infinity)); // false
+console.log(Number.isInteger(-Infinity)); // false
+console.log(Number.isInteger(null)); // false
+console.log(Number.isInteger({})); // false
+console.log(Number.isInteger(undefined)); // false
+console.log(Number.isInteger([])); // false
+```
+
+###### Polyfill
+```javascript
+Number.isInteger = Number.isInteger || function(value) {
+  return typeof value === "number" && 
+    isFinite(value) && 
+    Math.floor(value) === value;
+};
+```
+
+##### Number.isNaN()
+###### Problem
+```javascript
+console.log(NaN === NaN); // false
+```
+
+###### in ES5
+```javascript
+console.log(isNaN(0)); // false
+console.log(isNaN(-Infinity)); // false
+console.log(isNaN("1.1")); // false
+console.log(isNaN(NaN)); // true
+console.log(isNaN("NaN")); // true
+console.log(isNaN("a")); // true
+console.log(isNaN(0 / 0)); // true
+console.log(isNaN({})); // true
+console.log(isNaN([])); // false
+console.log(isNaN(undefined)); // true
+console.log(isNaN(null)); // false
+console.log(isNaN(/a/)); // true
+```
+
+###### in ES6
+```javascript
+console.log(Number.isNaN(0)); // false
+console.log(Number.isNaN(-Infinity)); // false
+console.log(Number.isNaN("1.1")); // false
+console.log(Number.isNaN(NaN)); // true
+console.log(Number.isNaN("NaN")); // false
+console.log(Number.isNaN("a")); // false
+console.log(Number.isNaN(0 / 0)); // true
+console.log(Number.isNaN({})); // false
+console.log(Number.isNaN([])); // false
+console.log(Number.isNaN(undefined)); // false
+console.log(Number.isNaN(null)); // false
+console.log(Number.isNaN(/a/)); // false
+```
+
+###### Polyfill
+```javascript
+Number.isNaN = Number.isNaN || function(value) {
+    return typeof value === "number" && isNaN(value);
+};
+
+// Or
+Number.isNaN = Number.isNaN || function(value) {     
+    return value !== value;
+};
+```
+
+##### Number.isSafeInteger()
+```javascript
+console.log(Number.isSafeInteger(3)); // true
+console.log(Number.isSafeInteger(Math.pow(2, 53))); // false
+console.log(Number.isSafeInteger(Math.pow(2, 53) - 1)); // true
+console.log(Number.isSafeInteger(NaN)); // false
+console.log(Number.isSafeInteger(Infinity)); // false
+console.log(Number.isSafeInteger('3')); // false
+console.log(Number.isSafeInteger(3.1)); // false
+console.log(Number.isSafeInteger(3.0)); // true
+```
+
+###### Polyfill
+```javascript
+Number.isSafeInteger = Number.isSafeInteger || function (value) {
+   return Number.isInteger(value) && Math.abs(value) <= Number.MAX_SAFE_INTEGER;
+};
+```
+
+##### Number.parseInt()
+###### Syntax
+```javascript
+Number.parseInt(string[, radix])
+```
+
+###### Parameters
+* string: 문자열  
+* radix: 2~36진, 10이 기본값.
+
+###### Example
+```javascript
+console.log(Number.parseInt === parseInt); // true
+console.log(Number.parseInt("11")); // 11
+console.log(Number.parseInt("11.11")); // 11
+console.log(Number.parseInt("11A")); // 11
+console.log(Number.parseInt("A11")); // NaN
+console.log(Number.parseInt("11A1")); // 11
+console.log(Number.parseInt("11.A")); // 11
+console.log(Number.parseInt("011")); // 11
+console.log(Number.parseInt("11 0")); // 11
+console.log(Number.parseInt("0xFF")); // 255
+console.log(Number.parseInt(true)); // NaN
+console.log(Number.parseInt(new Date())); // NaN
+```
+
+###### Problem
+```javascript
+console.log(Number.parseInt('0b111')); // 0
+console.log(Number.parseInt('0b111', 2)); // 0
+console.log(Number.parseInt('0o10')); // 0
+console.log(Number.parseInt('0o10', 8)); // 0
+```
+
+###### Solution
+```javascript
+console.log(Number.parseInt('111', 2)); // 7
+console.log(Number('0b111')); // 7
+console.log(Number.parseInt('10', 8)); // 8
+console.log(Number('0o10')); // 7
+```
+
+###### Polyfill
+```javascript
+Number.parseInt = Number.parseInt || parseInt;
+```
+
+##### Number.parseFloat()
+```javascript
+console.log(Number.parseFloat === parseFloat); // true
+console.log(Number.parseFloat("11")); // 11
+console.log(Number.parseFloat("11.11")); // 11.11
+console.log(Number.parseFloat("11A")); // 11
+console.log(Number.parseFloat("A11")); // NaN
+console.log(Number.parseFloat("11A1")); // 11
+console.log(Number.parseFloat("11.A")); // 11
+console.log(Number.parseFloat("011")); // 11
+console.log(Number.parseFloat("11 0")); // 11
+console.log(Number.parseFloat("0xFF")); // 0
+console.log(Number.parseFloat(true)); // NaN
+console.log(Number.parseFloat(new Date())); // NaN
+```
+
+###### Polyfill
+```javascript
+Number.parseFloat = Number.parseFloat || parseFloat;
+```
+
+##### Number.prototype.toExponential
+숫자를 지수를 통해 표현할 때 쓰인다.
 ```javascript
 let num = 7817.1278;
 console.log(num.toExponential()); // "7.8171278e+3"
@@ -185,7 +434,8 @@ num = 0.1445;
 console.log(num.toExponential()); // "1.445e-1"
 ```
 
-###### Number.prototype.toPrecision & Number.prototype.toFixed()
+##### Number.prototype.toPrecision & Number.prototype.toFixed()
+실수를 반올림 할 때 쓰인다.
 ```javascript
 const num = 123.45678;
 console.log(num.toPrecision()); // "123.45678"
@@ -195,32 +445,35 @@ console.log(num.toPrecision(4)); // "123.5"
 console.log(num.toFixed(4)); // "123.4568"
 ```
 
-###### Number.prototype.toLocaleString
-`Syntax`
+##### Number.prototype.toLocaleString
+###### Syntax
 ```javascript
-Number.prototype.toLocaleString([locales [, options]])
+Number.prototype.toLocaleString([locales [, options]]);
 ```
 
-`Parameters`
+###### Parameters  
 1. locales  
 [BCP 47 language tag](https://tools.ietf.org/html/rfc5646)  
-language[-script][-region]*(-variant)*(-extension)[-privateuse]  
-"en-US", "en-CA", "tlh-Kore-AQ-fonipa", "ja-JP", "zh-Hans-CN", etc.  
+language[-script][-region]\*(-variant)\*(-extension)[-privateuse]  
+"en-US", "en-CA", "tlh-Kore-AQ-fonipa", "ja-JP", "zh-Hans-CN", etc.
+
 2. Options  
 style: "currency", "percent", "decimal"(default)  
 currency: [Current currency & funds code list](http://www.currency-iso.org/en/home/tables/table-a1.html)  
 "USD", "EUR", "KRW", "JPY", "CNY", etc.
 
-`Checking for support`
+###### Checking for support
 ```javascript
 const isSupportToLocaleString = () =>
   !!(Intl && typeof Intl === "object" && typeof Intl.NumberFormat === "function");
-if(isSupportToLocaleString()) {
+if(isSupportToLocaleString()) { // if support toLocaleString()
+  // blahblah...
+} else { // if not support toLoacleString()
   // blahblah...
 }
 ```
 
-`Usage`
+###### Usage
 ```javascript
 const num = 123456.789;
 console.log(num.toLocaleString("en-US")); // 123.456.789
@@ -230,6 +483,26 @@ console.log(num.toLocaleString("en-UK", {style: "currency", currency: "EUR"})); 
 console.log(num.toLocaleString("tlh-Kore-AQ-fonipa", {style: "currency", currency: "KRW"})); // ₩123,457
 console.log(num.toLocaleString("ja-JP", {style: "currency", currency: "JPY"})); // ￥123,457
 console.log(num.toLocaleString("zh-Hans-CN", {style: "currency", currency: "CNY"})); // ￥123,456.79
+```
+
+##### Number.prototype.toString()
+숫자를 문자열로 바꿀 때 쓰인다.
+```javascript
+console.log(1.1.toString()); // "1.1"
+console.log(1.0.toString()); // "1"
+console.log(0b11.toString()); // "3"
+console.log(NaN.toString()); // "NaN"
+console.log(Infinity.toString()); // "Infinity"
+console.log(-Infinity.toString()); // -Infinity
+console.log(0.0.toString()); // "0"
+```
+
+##### Number.prototype.valueOf()
+숫자 래퍼 객체에서 숫자값을 얻어올 때 쓰인다.
+```javascript
+console.log(new Number(11).valueOf()); // 11
+console.log(new Number(0b11).valueOf()); // 3
+console.log(new Number({}).valueOf()); // NaN
 ```
 
 ### Number <-> String
