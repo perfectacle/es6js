@@ -28,10 +28,10 @@ console.log(071); // 57
 'use strict';
 console.log(071); // Uncaught SyntaxError: Octal literals are not allowed in strict mode.
 ```
-ES5의 strict mode에서는 8진수 리터럴이 적용되지 않습니다.  
-왜냐하면 ES5에는 8진수 문법이 존재하지 않기 때문입니다.  
-그럼에도 불구하고 브라우저 벤더들은 비표준 요소인 8진수 리터럴을 지원하게끔 구현하였습니다.  
-따라서 strict mode에 따라서 8진수 리터럴의 사용 가능 여부가 달려있습니다.
+ES5의 strict mode에서는 8진수 리터럴이 적용되지 않는다.  
+왜냐하면 ES5에는 8진수 문법이 존재하지 않기 때문이다.  
+그럼에도 불구하고 브라우저 벤더들은 비표준 요소인 8진수 리터럴을 지원하게끔 구현하였다.  
+따라서 strict mode에 따라서 8진수 리터럴의 사용 가능 여부가 달려있다.
 
 [MDN Strict mode](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Strict_mode#엄격한_모드_변경)  
 `strict mode in ECMAScript 5 forbids octal syntax.
@@ -62,8 +62,8 @@ console.log(0XA); // 10
 console.log(0b11.1); // Uncaught SyntaxError: missing ) after argument list
 ```
 
-실수가 되는 게 아니라 Number.prototype.1로 접근을 하게 됩니다.  
-10진수의 경우에는 실수 취급합니다.
+실수가 되는 게 아니라 Number.prototype.1로 접근을 하게 된다.  
+10진수의 경우에는 실수 취급한다.
 
 ```javascript
 Number.prototype.Aa = 'Aa';
