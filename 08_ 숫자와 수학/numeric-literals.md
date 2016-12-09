@@ -1,7 +1,7 @@
 # Numeric Literals
 ## Binary Literal
 수학식: 11<sub>(2)</sub>  
-프로그래밍 언어: 0b11
+프로그래밍 언어: 0b11, 0B11
 
 **in ES5**
 ```javascript
@@ -11,6 +11,7 @@ console.log(parseInt('11', 2)); // 3
 **in ES6**
 ```javascript
 console.log(0b11); // 3
+console.log(0B11); // 3
 ```
 
 ## Octal Literal
@@ -41,6 +42,7 @@ but it's supported in all browsers by prefixing the octal number with a zero:
 **in ES6**
 ```javascript
 console.log(0o71); // 57
+console.log(0O71); // 57
 ```
 
 ## Hexadecimal
@@ -50,7 +52,9 @@ console.log(0o71); // 57
 **in ES5**
 ```javascript
 console.log(0xff); // 255
+console.log(0Xff); // 255
 console.log(0xA); // 10
+console.log(0XA); // 10
 ```
 
 ## Caution
