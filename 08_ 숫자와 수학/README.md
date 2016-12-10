@@ -7,10 +7,10 @@
 * [Number](number.md)
   * Number type(Primitive values)  
   * Number object
-    1. As functions  
-    2. As constructors
-      * Properties  
-      * Methods
+  * Number functions
+    1. As function
+    2. As constructor
+  * Number ↔ String    
 * Math
 
 ## 참조 링크
