@@ -6,7 +6,7 @@
   * Hexadecimal
 * [Number](number.md)
   * Number type(Primitive values)  
-  * Number object(Wrapper object)
+  * Number object
     1. As functions  
     2. As constructors
       * Properties  
@@ -20,4 +20,4 @@
 * [Wrapper Objects for Primitives](http://speakingjs.com/es5/ch08.html#wrapper_objects)
 * [The Secret Life of JavaScript Primitives](https://javascriptweblog.wordpress.com/2010/09/27/the-secret-life-of-javascript-primitives/)
 * [ES6 Number Improvements in Depth](https://ponyfoo.com/articles/es6-number-improvements-in-depth)  
-* [New number and Math features](http://exploringjs.com/es6/ch_numbers.html)  
+* [New number and Math features](http://exploringjs.com/es6/ch_numbers.html)

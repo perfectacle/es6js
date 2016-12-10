@@ -1,6 +1,7 @@
 # Number
 * Number type(Primitive values)
-* Number object(Wrapper object)
+* Number function
+* Number object
 
 ## Number type(Primitive values)
 ES에서 숫자형은 단 하나의 자료형 뿐이다.  
@@ -39,11 +40,7 @@ console.log(Infinity === -Infinity); // false
 console.log(1 / "A"); // NaN
 ```
 
-## Number object(Wrapper object)
-* As functions
-* As constructors
-
-### As functions
+## Number function
 #### Syntax
 ```javascript
 Number(value);
@@ -70,58 +67,63 @@ console.log(Number({a: "b"})); // NaN
 console.log(Number(11)); // 11
 ```
 
-### As constructors
-#### Syntax
-```javascript
-new Number(value);
-```
+## Number object
+* As object
+* As constructor
 
-#### Parameter
-value: 어떠한 데이터 타입의 값도 올 수 있다.
-
+### As object
 #### Structure
 ```javascript
-const objNum = new Number(11);
-console.log(typeof objNum); // "object"
-console.dir(objNum);
+console.dir(Number);
 ```
-![Number Constructor Structure](imgs/number-constructor.png)
-
-#### Necessity
-[The Secret Life of JavaScript Primitives](https://javascriptweblog.wordpress.com/2010/09/27/the-secret-life-of-javascript-primitives/)  
-ES에서 숫자형의 프로퍼티와 메소드를 사용할 때 내부 동작 원리는 아래와 같다.
-```javascript
-// 우리가 알던 방식대로 메소드 사용해보자.
-11.1.toString(); // "11.1";
-
-/*
- * Number.prototype.toString() 메소드를 쓰기 위해서
- * 원시값인 11.1을 Number 객체로 바꿔줘야한다.
- * 따라서 위 내용은 아래와 같이 자동으로 동작하게 된다.
- */
-new Number(11.1).toString(); // 11.1
-```
+![Number object structure](imgs/number-object.png)
 
 #### Properties
-1. Number.EPSILON  
-2. Number.MIN_SAFE_INTEGER  
-3. Number.MAX_SAFE_INTEGER  
-4. Number.prototype  
-  1. Number.prototype.toExponential()  
-  2. Number.prototype.toPrecision()  
-  3. Number.prototype.toFixed()  
-  4. Number.prototype.toLocaleString()  
-  5. Number.prototype.toString()  
-  6. Number.prototype.valueOf()
-  
-래퍼 객체의 표준 프로퍼티들은 상수이다.  
+1. Number.POSITIVE_INFINITY  
+2. Number.NEGATIVE_INFINITY  
+3. Number.NaN  
+4. Number.MIN_VALUE  
+5. Number.MAX_VALUE  
+6. Number.MIN_SAFE_INTEGER  
+7. Number.MAX_SAFE_INTEGER   
+8. Number.EPSILON
+
+표준 프로퍼티들은 상수이다.  
 즉 변경이 불가능하다.
 변경이 불가능하기 때문에 폴리필이 존재하지 않는다.
 ```javascript
 Number.EPSILON = "asdf"; // 오류는 나지 않는다.
 console.log(Number.EPSILON); // 2.220446049250313e-16
-Number.prototype = "qq"; // 역시 오류는 나지 않는다.
-console.log(123 .toString()); // "123"
+```
+
+##### Number.POSITIVE_INFINITY & Number.NEGATIVE_INFINITY & Number.NaN
+```javascript
+console.log(Number.POSITIVE_INFINITY === Infinity); // true
+console.log(Number.NEGATIVE_INFINITY === -Infinity); // true
+console.log(Number.isNaN(Number.NaN)); // true
+```
+
+##### Number.MIN_VALUE & Number.MAX_VALUE & Number.MIN_SAFE_INTEGER & Number.MAX_SAFE_INTEGER
+###### Problem in ES
+```javascript
+console.log(Number.MIN_VALUE); // 5e-324
+console.log(Number.MIN_VALUE - 1); // -1
+console.log(Number.MIN_VALUE + 1); // 1
+console.log(Number.MAX_VALUE); // 1.7976931348623157e+308
+console.log(Number.MAX_VALUE + 1); // 1.7976931348623157e+308
+console.log(Number.MAX_VALUE + 1 === Number.MAX_VALUE - 1); // true
+```
+
+###### Solution in ES6
+```javascript
+console.log(Number.MIN_SAFE_INTEGER); // -9007199254740991
+console.log(-(Math.pow(2, 53) - 1)); // -9007199254740991
+console.log(Number.MIN_SAFE_INTEGER !== Number.MIN_SAFE_INTEGER + 1); // true
+console.log(Number.MIN_SAFE_INTEGER - 1 !== Number.MIN_SAFE_INTEGER - 2); // false
+console.log(Number.MAX_SAFE_INTEGER); // 9007199254740991
+console.log(Math.pow(2, 53) - 1); // 9007199254740991
+console.log(Number.MAX_SAFE_INTEGER !== Number.MAX_SAFE_INTEGER - 1); // true
+console.log(Number.MAX_SAFE_INTEGER + 1 === Number.MAX_SAFE_INTEGER + 2); // true
 ```
 
 ##### Number.EPSILON
@@ -154,6 +156,7 @@ console.log(0.0000000000000004 < Number.EPSILON)
 
 즉 좌변에 있는 값이 우변에 있는 Number.EPSILON 보다도 작다면 무시해도 되는 오차다.  
 
+###### Usage
 ```javascript
 // 이 함수가 true를 반환하면 formula와 result는 동일하다고 보면 됨.
 // Number.EPILON은 항상 양수이기 때문에 Math.abs 메소드를 사용하여
@@ -164,63 +167,19 @@ console.log(isEqual(0.1 + 1 - 2.2, -1.1)); // true
 console.log(isEqual(0.1 + 1 - 2.2, -1.2)); // false
 ```
 
-##### Number.MIN_SAFE_INTEGER & Number.MAX_SAFE_INTEGER
-###### Problem in ES
-```javascript
-console.log(Number.MIN_VALUE); // 5e-324
-console.log(Number.MIN_VALUE - 1); // -1
-console.log(Number.MIN_VALUE + 1); // 1
-console.log(Number.MAX_VALUE); // 1.7976931348623157e+308
-console.log(Number.MAX_VALUE + 1); // 1.7976931348623157e+308
-console.log(Number.MAX_VALUE + 1 === Number.MAX_VALUE - 1); // true
-```
-
-###### Solution in ES6
-```javascript
-console.log(Number.MIN_SAFE_INTEGER); // -9007199254740991
-console.log(-(Math.pow(2, 53) - 1)); // -9007199254740991
-console.log(Number.MIN_SAFE_INTEGER !== Number.MIN_SAFE_INTEGER + 1); // true
-console.log(Number.MIN_SAFE_INTEGER - 1 !== Number.MIN_SAFE_INTEGER - 2); // false
-console.log(Number.MAX_SAFE_INTEGER); // 9007199254740991
-console.log(Math.pow(2, 53) - 1); // 9007199254740991
-console.log(Number.MAX_SAFE_INTEGER !== Number.MAX_SAFE_INTEGER - 1); // true
-console.log(Number.MAX_SAFE_INTEGER + 1 === Number.MAX_SAFE_INTEGER + 2); // true
-```
-
-##### Number.prototype
-숫자가 상속받는 프로퍼티와 메소들을 정의해놓은 프로퍼티이다.  
-표준 메소드 및 프로퍼티가 미리 정의돼있으며, 사용자가 직접 정의하려면 아래와 같이 하면 된다. 
-```javascript
-Number.prototype.lastNum = function() {
-  return this % 10;
-};
-console.log(12.0.lastNum()); // 2
-```
-
 #### Methods
 1. Number.isFinite()  
 2. Number.isInteger()  
 3. Number.isNaN()  
 4. Number.isSafeInteger()  
 5. Number.parseInt()  
-6. Number.parseFloat()  
-7. Number.prototype.toExponential()  
-8. Number.prototype.toPrecision()  
-9. Number.prototype.toFixed()  
-10. Number.prototype.toLocaleString()  
-11. Number.prototype.toString()  
-12. Number.prototype.valueOf()
+6. Number.parseFloat()
 
-래퍼 객체의 메소드는 수정 가능하다.
+메소드는 수정 가능하다.
 수정 가능하기 때문에 폴리필도 제작 가능하다.
 ```javascript
 Number.isFinite = () => "a";
 console.log(Number.isFinite(123)); // "a"
-
-Number.prototype.toExponential = function() {
-  return this * this;
-}
-console.log(11 .toExponential()); // 121
 ```
 
 ##### Number.isFinite()
@@ -392,9 +351,13 @@ console.log(Number.parseInt('0o10', 8)); // 0
 ###### Solution
 ```javascript
 console.log(Number.parseInt('111', 2)); // 7
+console.log(new Number('0b111').valueOf()); // 7
 console.log(Number('0b111')); // 7
+console.log(+'0b111'); // 7
 console.log(Number.parseInt('10', 8)); // 8
-console.log(Number('0o10')); // 7
+console.log(new Number('0o10').valueOf()); // 8
+console.log(Number('0o10')); // 8
+console.log(+'0o10'); // 8
 ```
 
 ###### Polyfill
@@ -423,6 +386,68 @@ console.log(Number.parseFloat(new Date())); // NaN
 Number.parseFloat = Number.parseFloat || parseFloat;
 ```
 
+### As constructors
+#### Syntax
+```javascript
+new Number(value);
+```
+
+#### Parameter
+value: 어떠한 데이터 타입의 값도 올 수 있다.
+
+#### Structure
+```javascript
+const objNum = new Number(11);
+console.log(typeof objNum); // "object"
+console.dir(objNum);
+```
+![Number Constructor Structure](imgs/number-constructor.png)
+
+#### Necessity
+[The Secret Life of JavaScript Primitives](https://javascriptweblog.wordpress.com/2010/09/27/the-secret-life-of-javascript-primitives/)  
+ES에서 숫자형의 프로퍼티와 메소드를 사용할 때 내부 동작 원리는 아래와 같다.
+```javascript
+// 우리가 알던 방식대로 메소드 사용해보자.
+11.1.toString(); // "11.1";
+
+/*
+ * Number.prototype.toString() 메소드를 쓰기 위해서
+ * 원시값인 11.1을 Number 객체로 바꿔줘야한다.
+ * 따라서 위 내용은 아래와 같이 자동으로 동작하게 된다.
+ */
+new Number(11.1).toString(); // 11.1
+```
+
+#### Property
+##### Number.prototype  
+숫자가 상속받는 프로퍼티와 메소들을 정의해놓은 프로퍼티이다.  
+표준 메소드 및 프로퍼티가 미리 정의돼있으며, 사용자가 직접 정의하려면 아래와 같이 하면 된다. 
+```javascript
+Number.prototype.lastNum = function() {
+  return this % 10;
+};
+console.log(12.0.lastNum()); // 2
+```
+
+#### Methods
+1. Number.prototype.toFixed()  
+2. Number.prototype.toPrecision()  
+3. Number.prototype.toExponential()  
+4. Number.prototype.toString()  
+5. Number.prototype.valueOf()
+6. Number.prototype.toLocaleString()
+
+##### Number.prototype.toFixed() & Number.prototype.toPrecision()
+실수를 반올림 할 때 쓰인다.
+```javascript
+const num = 123.45678;
+console.log(num.toFixed()); // "123"
+console.log(num.toPrecision()); // "123.45678"
+console.log(num.toString()); // "123.45678"
+console.log(num.toFixed(4)); // "123.4568"
+console.log(num.toPrecision(4)); // "123.5"
+```
+
 ##### Number.prototype.toExponential
 숫자를 지수를 통해 표현할 때 쓰인다.
 ```javascript
@@ -433,16 +458,24 @@ console.log(num.toExponential(6)); // "7.817128e+3"
 num = 0.1445;
 console.log(num.toExponential()); // "1.445e-1"
 ```
-
-##### Number.prototype.toPrecision & Number.prototype.toFixed()
-실수를 반올림 할 때 쓰인다.
+##### Number.prototype.toString()
+숫자를 문자열로 바꿀 때 쓰인다.
 ```javascript
-const num = 123.45678;
-console.log(num.toPrecision()); // "123.45678"
-console.log(num.toString()); // "123.45678"
-console.log(num.toFixed()); // "123"
-console.log(num.toPrecision(4)); // "123.5"
-console.log(num.toFixed(4)); // "123.4568"
+console.log(1.1.toString()); // "1.1"
+console.log(1.0.toString()); // "1"
+console.log(0b11.toString()); // "3"
+console.log(NaN.toString()); // "NaN"
+console.log(Infinity.toString()); // "Infinity"
+console.log(-Infinity.toString()); // -Infinity
+console.log(0.0.toString()); // "0"
+```
+
+##### Number.prototype.valueOf()
+숫자 래퍼 객체에서 숫자값을 얻어올 때 쓰인다.
+```javascript
+console.log(new Number(11).valueOf()); // 11
+console.log(new Number(0b11).valueOf()); // 3
+console.log(new Number({}).valueOf()); // NaN
 ```
 
 ##### Number.prototype.toLocaleString
@@ -485,26 +518,6 @@ console.log(num.toLocaleString("ja-JP", {style: "currency", currency: "JPY"})); 
 console.log(num.toLocaleString("zh-Hans-CN", {style: "currency", currency: "CNY"})); // ￥123,456.79
 ```
 
-##### Number.prototype.toString()
-숫자를 문자열로 바꿀 때 쓰인다.
-```javascript
-console.log(1.1.toString()); // "1.1"
-console.log(1.0.toString()); // "1"
-console.log(0b11.toString()); // "3"
-console.log(NaN.toString()); // "NaN"
-console.log(Infinity.toString()); // "Infinity"
-console.log(-Infinity.toString()); // -Infinity
-console.log(0.0.toString()); // "0"
-```
-
-##### Number.prototype.valueOf()
-숫자 래퍼 객체에서 숫자값을 얻어올 때 쓰인다.
-```javascript
-console.log(new Number(11).valueOf()); // 11
-console.log(new Number(0b11).valueOf()); // 3
-console.log(new Number({}).valueOf()); // NaN
-```
-
 ### Number <-> String
 ```javascript
 const num1 = "10";
@@ -514,6 +527,7 @@ const sub = num1 - num2; // 0
 const mul = num1 * num2; // 100
 const div = num1 / num2; // 1
 ```
+
 #### String to Number
 * parseInt(string[, radix])
 * parseFloat(string)
