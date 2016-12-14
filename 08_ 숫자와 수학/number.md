@@ -1,6 +1,8 @@
 # Number
 * Number type(Primitive values)
 * Number object
+  * Properties
+  * Methods
 * Number functions
   * As function
   * As constructor
@@ -8,13 +10,14 @@
 
 ## Number type(Primitive values)
 ES에서 숫자형은 단 하나의 자료형 뿐이다.  
-[double-precision 64-bit binary format IEEE 754 value](https://en.wikipedia.org/wiki/Double-precision_floating-point_format)  
+Double: 자바나 C 등등의 언어에서 실수를 표현하기 위한 자료형, 8Byte = 64Bit  
+[Double-precision floating-point format](https://en.wikipedia.org/wiki/Double-precision_floating-point_format)  
 ![ES에서 쓰는 숫자의 형태](imgs/IEEE-754-Double-Floating-Point-Format.png)  
 1. 부호(sign)를 표현하기 위한 1비트 (+, -)  
 2. 지수부(exponent part)를 표현하기 위한 11비트  
 3. 가수부(fraction part)를 표현하기 위한 52비트
 
-범위: -(2<sup>53</sup>-1) ~ 2<sup>53</sup>-1
+손실이 없는 범위: -(2<sup>53</sup>-1) ~ 2<sup>53</sup>-1
 ```javascript
 console.log(Number.MIN_SAFE_INTEGER); // -9007199254740991
 console.log(-(Math.pow(2, 53) - 1)); // -9007199254740991
@@ -34,12 +37,13 @@ console.log(1 .toString() === 1.0.toString()); // true
 2. -Infinity  
 3. NaN(Not a Number)
 
-또한 0은 (+)0과 -0으로 나뉘어있지만 그 둘의 값은 같다.
+또한 0은 (+)0과 -0으로 나뉘어있지만 그 둘의 값은 같다??
 ```javascript
 console.log(0 === -0); // true
 console.log(1 / 0); // Infinity
 console.log(1 / -0); // -Infinity
 console.log(Infinity === -Infinity); // false
+console.log(Object.is(0, -0)); // false
 console.log(1 / "A"); // NaN
 ```
 
@@ -78,6 +82,7 @@ console.log(Number.isNaN(Number.NaN)); // true
 
 #### Number.MIN_VALUE & Number.MAX_VALUE & Number.MIN_SAFE_INTEGER & Number.MAX_SAFE_INTEGER
 ##### Problem in ES
+[수의 표현범위가 다른 int와 float, 그리고 신뢰할 수 없는 부동소수점](http://slame.tistory.com/2)
 ```javascript
 console.log(Number.MIN_VALUE); // 5e-324
 console.log(Number.MIN_VALUE - 1); // -1
@@ -88,6 +93,7 @@ console.log(Number.MAX_VALUE + 1 === Number.MAX_VALUE - 1); // true
 ```
 
 ##### Solution in ES6
+[부동 소수점에 대한 이해](http://thrillfighter.tistory.com/349)
 ```javascript
 console.log(Number.MIN_SAFE_INTEGER); // -9007199254740991
 console.log(-(Math.pow(2, 53) - 1)); // -9007199254740991
@@ -106,8 +112,13 @@ console.log(.1 + .2); // 0.30000000000000004
 console.log(0.1 + 0.2 === 0.3); // false
 ```
 ES에서는 위와 같이 소수점 계산에서 고질적인 문제를 안고 있다.  
-이는 아마 ES에서 쓰는 숫자형인  
-[double-precision 64-bit binary format IEEE 754 value](https://en.wikipedia.org/wiki/Double-precision_floating-point_format)의 문제라고 생각한다.  
+이는 아마 [ES에서 쓰이는 엔진의 문제](http://speakingjs.com/es5/ch11.html#rounding_errors)라고 보여진다.
+[decimal64 floating-point format](https://en.wikipedia.org/wiki/Decimal64_floating-point_format)
+```
+JavaScript’s numbers are usually entered as decimal floating-point numbers,  
+but they are internally represented as binary floating-point numbers.  
+That leads to imprecision.
+```
 어찌보면 0.00000000000000004 정도의 오차는 무시되도 되는 작은 숫자이다.  
 
 ###### Solution in ES6
