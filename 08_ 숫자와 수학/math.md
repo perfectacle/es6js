@@ -217,7 +217,8 @@ Object.defineProperty(Math, "getRandomRange", {
     return isInt ? Number.parseInt(rand) : rand;
   }
 });
-console.log(Math.getRandomRange(1, 2));
+console.log(Math.getRandomRange(1, 10)); // 6.98786421003396
+console.log(Math.getRandomRange(1, 10, true)); // 8
 ```
 
 #### [Math.sign(x)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sign) `*`

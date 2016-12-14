@@ -46,11 +46,6 @@ console.log(Number.MAX_VALUE / 0.5); // Infinity
 console.log(Number.MAX_VALUE * 1.000000000000001); // Infinity
 console.log(Number.MAX_VALUE * 1.0000000000000001); // 1.7976931348623157e+308
 console.log(1.0000000000000001 === 1); // true
-console.log(0 === -0); // true
-console.log(1 / 0); // Infinity
-console.log(1 / -0); // -Infinity
-console.log(Infinity === -Infinity); // false
-console.log(Object.is(0, -0)); // false
 ```
 
 ### Negative Zero
@@ -80,6 +75,8 @@ console.log(-.0.toString()); // -0
 console.log(+"-0"); // -0
 console.log(Number("-0")); // -0
 console.log(JSON.parse("-0")); // -0
+console.log(Math.max(-0, 0)); // 0
+console.log(Math.min(-0, 0)); // -0
 console.log(Object.is(0, -0)); // false
 ```
 
@@ -126,6 +123,7 @@ console.log(Number.isNaN(Number.NaN)); // true
 
 #### [Number.MIN_VALUE](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MIN_VALUE) & [Number.MAX_VALUE](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_VALUE)
 ##### Problem in ES
+[부동 소수점에 대한 이해](http://thrillfighter.tistory.com/349)  
 [수의 표현범위가 다른 int와 float, 그리고 신뢰할 수 없는 부동소수점](http://slame.tistory.com/2)
 ```javascript
 console.log(Number.MIN_VALUE); // 5e-324
@@ -136,9 +134,8 @@ console.log(Number.MAX_VALUE + 1); // 1.7976931348623157e+308
 console.log(Number.MAX_VALUE + 1 === Number.MAX_VALUE - 1); // true
 ```
 
-#### [Number.MIN_SAFE_INTEGER](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MIN_SAFE_INTEGER) `*` & [Number.MAX_SAFE_INTEGER `*`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER)
+#### [Number.MIN_SAFE_INTEGER](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MIN_SAFE_INTEGER) `*` & [Number.MAX_SAFE_INTEGER](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER) `*`
 ##### Solution in ES6
-[부동 소수점에 대한 이해](http://thrillfighter.tistory.com/349)
 ```javascript
 console.log(Number.MIN_SAFE_INTEGER); // -9007199254740991
 console.log(-(Math.pow(2, 53) - 1)); // -9007199254740991
@@ -157,13 +154,12 @@ console.log(.1 + .2); // 0.30000000000000004
 console.log(0.1 + 0.2 === 0.3); // false
 ```
 ES에서는 위와 같이 소수점 계산에서 고질적인 문제를 안고 있다.  
-이는 아마 [ES에서 쓰이는 엔진의 문제](http://speakingjs.com/es5/ch11.html#rounding_errors)라고 보여진다.
+이는 아마 [ES에서 쓰이는 엔진의 문제](http://speakingjs.com/es5/ch11.html#rounding_errors)라고 보여진다.  
 [decimal64 floating-point format](https://en.wikipedia.org/wiki/Decimal64_floating-point_format)
-```
-JavaScript’s numbers are usually entered as decimal floating-point numbers,  
-but they are internally represented as binary floating-point numbers.  
+> JavaScript’s numbers are usually entered as decimal floating-point numbers,
+but they are internally represented as binary floating-point numbers.
 That leads to imprecision.
-```
+
 어찌보면 0.00000000000000004 정도의 오차는 무시되도 되는 작은 숫자이다.  
 
 ###### Solution in ES6
@@ -507,13 +503,13 @@ if(isSupportToLocaleString()) { // if support toLocaleString()
 ###### Usage
 ```javascript
 const num = 123456.789;
-console.log(num.toLocaleString("en-US")); // 123.456.789
-console.log(num.toLocaleString("zh-Hans-CN-u-nu-hanidec")); // 一二三,四五六.七八九
-console.log(num.toLocaleString("en-US", {style: "currency", currency: "USD"})); // $123,456.79
-console.log(num.toLocaleString("en-UK", {style: "currency", currency: "EUR"})); // €123,456.79
-console.log(num.toLocaleString("tlh-Kore-AQ-fonipa", {style: "currency", currency: "KRW"})); // ₩123,457
-console.log(num.toLocaleString("ja-JP", {style: "currency", currency: "JPY"})); // ￥123,457
-console.log(num.toLocaleString("zh-Hans-CN", {style: "currency", currency: "CNY"})); // ￥123,456.79
+console.log(num.toLocaleString("en-US")); // "123.456.789"
+console.log(num.toLocaleString("zh-Hans-CN-u-nu-hanidec")); // "一二三,四五六.七八九"
+console.log(num.toLocaleString("en-US", {style: "currency", currency: "USD"})); // "$123,456.79"
+console.log(num.toLocaleString("en-UK", {style: "currency", currency: "EUR"})); // "€123,456.79"
+console.log(num.toLocaleString("tlh-Kore-AQ-fonipa", {style: "currency", currency: "KRW"})); // "₩123,457"
+console.log(num.toLocaleString("ja-JP", {style: "currency", currency: "JPY"})); // "￥123,457"
+console.log(num.toLocaleString("zh-Hans-CN", {style: "currency", currency: "CNY"})); // "￥123,456.79"
 ```
 
 ## Number functions
@@ -649,7 +645,7 @@ console.log(new Number("0b11").valueOf()); // 3
 console.log(new Number("0o11").valueOf()); // 9
 ```
 
-### Number(object)
+### Number(string)
 ```javascript
 console.log(Number("11")); // 11
 console.log(Number("11.11")); // 11.11
@@ -662,7 +658,7 @@ console.log(Number("0b11")); // 3
 console.log(Number("0o11")); // 9
 ```
 
-### +str, 1*str
+### +string, 1*string
 ```javascript
 console.log(+"11"); // 11
 console.log(+"11.11"); // 11.11
@@ -678,16 +674,16 @@ console.log(+"0o11"); // 9
 ### Performance
 ```javascript
 const iterations = 10000000;
-console.time("parseInt()");
+console.time("Number.parseInt()");
 for(let i=0; i<iterations; i++){
-    parseInt("1.1"); // parseInt(): 561.062ms
+    Number.parseInt("1.1"); // Number.parseInt(): 561.062ms
 }
-console.timeEnd("parseInt()");
-console.time("parseFloat()");
+console.timeEnd("Number.parseInt()");
+console.time("Number.parseFloat()");
 for(let i=0; i<iterations; i++){
-    parseFloat("1.1"); // parseFloat(): 737.437ms
+    Number.parseFloat("1.1"); // Number.parseFloat(): 737.437ms
 }
-console.timeEnd("parseFloat()");
+console.timeEnd("Number.parseFloat()");
 console.time("new Number().valueOf()");
 for(let i=0; i<iterations; i++){
     new Number("1.1").valueOf(); // new Number().valueOf(): 1112.782ms
@@ -727,17 +723,6 @@ console.log(-Infinity.toString()); // -Infinity
 console.log(0.0.toString()); // "0"
 ```
 
-### new Number().toString()
-```javascript
-console.log(new Number(1.1).toString()); // "1.1"
-console.log(new Number(1.0).toString()); // "1"
-console.log(new Number(0b11).toString()); // "3"
-console.log(new Number(NaN).toString()); // "NaN"
-console.log(new Number(Infinity).toString()); // "Infinity"
-console.log(new Number(-Infinity).toString()); // -Infinity
-console.log(new Number(0.0).toString()); // "0"
-```
-
 ### String(number)
 ```javascript
 console.log(String(1.1)); // "1.1"
@@ -766,11 +751,6 @@ const iterations = 10000000;
 console.time("Number.prototype.toString()");
 for(let i=0; i<iterations; i++){
     1.1.toString(); // Number.prototype.toString(): 268.619ms
-}
-console.timeEnd("Number.prototype.toString()");
-console.time("new Number().toString()");
-for(let i=0; i<iterations; i++){
-    new Number(1.1).toString(); // new Number().toString(): 484.400ms
 }
 console.timeEnd("new Number().toString()");
 console.time("String(number)");

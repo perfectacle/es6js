@@ -12,7 +12,7 @@
 console.log(parseInt('11', 2)); // 3
 ```
 
-**in ES6*
+**in ES6**
 ```javascript
 console.log(0b11); // 3
 console.log(0B11); // 3
@@ -37,7 +37,7 @@ ES5의 strict mode에서는 8진수 리터럴이 적용되지 않는다.
 그럼에도 불구하고 브라우저 벤더들은 비표준 요소인 8진수 리터럴을 지원하게끔 구현하였다.  
 따라서 strict mode에 따라서 8진수 리터럴의 사용 가능 여부가 달려있다.
 
-[MDN Strict mode](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Strict_mode#엄격한_모드_변경)  
+[MDN Strict mode](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Strict_mode#Converting_mistakes_into_errors)  
 > strict mode in ECMAScript 5 forbids octal syntax.
 Octal syntax isn't part of ECMAScript 5,
 but it's supported in all browsers by prefixing the octal number with a zero:
