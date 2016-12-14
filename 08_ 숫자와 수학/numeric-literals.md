@@ -1,7 +1,7 @@
 # Numeric Literals
 * [Binary Literal](#binary-literal)  
 * [Octal Literal](#octal-literal)  
-* [Hexadecimal](md#hexadecimal)
+* [Hexadecimal](#hexadecimal)
 
 ## Binary Literal
 수학식: 11<sub>(2)</sub>  

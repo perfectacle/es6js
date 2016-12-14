@@ -16,7 +16,7 @@ console.log(Math.qwer); // "qqqq"
 ```
 
 ### Properties
-* Math.PI  
+* [Math.PI](#mathpi)  
 * [Math.E](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/E)    
 Euler's constant and the base of natural logarithms, approximately 2.718.  
 * [Math.LN2](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/LN2)    
@@ -32,7 +32,7 @@ Square root of 1/2; equivalently, 1 over the square root of 2, approximately 0.7
 * [Math.SQRT2](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/SQRT2)  
 Square root of 2, approximately 1.414.  
 
-#### Math.PI
+#### [Math.PI](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/PI)
 𝛑 ≒ 3.141592653589793
 
 ##### Usage

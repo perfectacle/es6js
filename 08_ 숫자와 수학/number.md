@@ -1,10 +1,10 @@
 # Number
 * [Number type(Primitive values)](#number-typeprimitive-values)    
-  * [Number object](##number-object)  
+  * [Number object](#number-object)  
     * [Properties](#properties)  
     * [Methods](#methods)
   * [Number functions](#number-functions)  
-    * [As function](#as-functions)  
+    * [As function](#as-function)  
     * [As constructor](#as-constructor)
   * [Number ↔ String](#number--string)  
 
