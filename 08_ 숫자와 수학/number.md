@@ -1,12 +1,12 @@
 # Number
-* Number type(Primitive values)
-* Number object
-  * Properties
-  * Methods
-* Number functions
-  * As function
-  * As constructor
-* Number ↔ String
+* [Number type(Primitive values)](#number-typeprimitive-values)    
+  * [Number object](##number-object)  
+    * [Properties](#properties)  
+    * [Methods](#methods)
+  * [Number functions](#number-functions)  
+    * [As function](#as-functions)  
+    * [As constructor](#as-constructor)
+  * [Number ↔ String](#number--string)  
 
 ## Number type(Primitive values)
 ES에서 숫자형은 단 하나의 자료형 뿐이다.  
@@ -32,20 +32,66 @@ console.log(1 === 1.0); // true
 console.log(1 .toString() === 1.0.toString()); // true
 ```
 
-또한 숫자형에서는 특수한 세 가지 값이 존재한다.  
-1. (+)Infinity  
-2. -Infinity  
-3. NaN(Not a Number)
+또한 숫자형에서는 특수한 네 가지 값이 존재한다.  
+1. NaN(Not a Number)  
+2. (+)Infinity  
+3. -Infinity  
+4. -0(Negative Zero)
 
-또한 0은 (+)0과 -0으로 나뉘어있지만 그 둘의 값은 같다??
 ```javascript
+console.log(1 / "A"); // NaN
+console.log(Number.MAX_VALUE + 1e+291); // 1.7976931348623157e+308
+console.log(Number.MAX_VALUE + 1e+292); // Infinity
+console.log(Number.MAX_VALUE / 0.5); // Infinity
+console.log(Number.MAX_VALUE * 1.000000000000001); // Infinity
+console.log(Number.MAX_VALUE * 1.0000000000000001); // 1.7976931348623157e+308
+console.log(1.0000000000000001 === 1); // true
 console.log(0 === -0); // true
 console.log(1 / 0); // Infinity
 console.log(1 / -0); // -Infinity
 console.log(Infinity === -Infinity); // false
 console.log(Object.is(0, -0)); // false
-console.log(1 / "A"); // NaN
 ```
+
+### Negative Zero
++0과 -0은 같다.
+```javascript
+console.log(0 == -0); // true
+console.log(0 === -0); // true
+console.log(0 != -0); // false
+console.log(0 !== -0); // false
+console.log(0 < -0); // false
+console.log(0 > -0); // false
+console.log(0 <= -0); // false
+console.log(0 >= -0); // false
+console.log("" + -0); // "0"
+console.log(String(-0)); // "0"
+console.log(JSON.stringify(-0)); // "0"
+```
+
+하지만 아래 현상은 어떻게 설명할 수 있을까?
+```javascript
+console.log(1 / 0); // Infinity
+console.log(1 / -0); // -Infinity
+console.log(Infinity === -Infinity); // false
+console.log(-0.0.toString()); // -0
+console.log(-0 .toString()); // -0
+console.log(-.0.toString()); // -0
+console.log(+"-0"); // -0
+console.log(Number("-0")); // -0
+console.log(JSON.parse("-0")); // -0
+console.log(Object.is(0, -0)); // false
+```
+
+#### Necessity
+[Zeros](https://github.com/getify/You-Dont-Know-JS/blob/master/types%20%26%20grammar/ch2.md#zeros)  
+스피드나 x, y와 같은 방향 같은 요소를 쓰는 어플리케이션에서 만약 -0이 0으로 바뀐다면,  
+속도나 방향 등등의 정보를 잃게될 것이다.  
+
+`
+There are certain applications where developers use the magnitude of a value to represent one piece of information (like speed of movement per animation frame) and the sign of that number to represent another piece of information (like the direction of that movement).  
+In those applications, as one example, if a variable arrives at zero and it loses its sign, then you would lose the information of what direction it was moving in before it arrived at zero. Preserving the sign of the zero prevents potentially unwanted information loss.
+`
 
 ## Number object
 ### Structure

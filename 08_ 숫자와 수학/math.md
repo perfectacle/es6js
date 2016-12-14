@@ -1,7 +1,7 @@
 # Math
-* Math object
-  * Properties
-  * Methods
+* [Math object](#math-object)  
+  * [Properties](#properties)  
+  * [Methods](#methods)
 
 ## Math object
 Math object는 전역 공간에 존재하는 객체이다.  

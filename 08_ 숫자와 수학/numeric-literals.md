@@ -1,4 +1,8 @@
 # Numeric Literals
+* [Binary Literal](#binary-literal)  
+* [Octal Literal](#octal-literal)  
+* [Hexadecimal](md#hexadecimal)
+
 ## Binary Literal
 수학식: 11<sub>(2)</sub>  
 프로그래밍 언어: 0b11, 0B11
@@ -49,7 +53,7 @@ console.log(0O71); // 57
 수학식: FF<sub>(16)</sub>  
 프로그래밍 언어: 0xFF, xFF, hFF, etc.
 
-**in ES5**
+**in ES**
 ```javascript
 console.log(0xff); // 255
 console.log(0Xff); // 255
