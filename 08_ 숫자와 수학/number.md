@@ -17,7 +17,7 @@ Double: 자바나 C 등등의 언어에서 실수를 표현하기 위한 자료�
 2. 지수부(exponent part)를 표현하기 위한 11비트  
 3. 가수부(fraction part)를 표현하기 위한 52비트
 
-손실이 없는 범위: -(2<sup>53</sup>-1) ~ 2<sup>53</sup>-1
+범위: -(2<sup>53</sup>-1) ~ 2<sup>53</sup>-1
 ```javascript
 console.log(Number.MIN_SAFE_INTEGER); // -9007199254740991
 console.log(-(Math.pow(2, 53) - 1)); // -9007199254740991
@@ -84,14 +84,12 @@ console.log(Object.is(0, -0)); // false
 ```
 
 #### Necessity
-[Zeros](https://github.com/getify/You-Dont-Know-JS/blob/master/types%20%26%20grammar/ch2.md#zeros)  
+[You Don't Know JS: Types & Grammar - Zeros](https://github.com/getify/You-Dont-Know-JS/blob/master/types%20%26%20grammar/ch2.md#zeros)    
 스피드나 x, y와 같은 방향 같은 요소를 쓰는 어플리케이션에서 만약 -0이 0으로 바뀐다면,  
 속도나 방향 등등의 정보를 잃게될 것이다.  
 
-`
-There are certain applications where developers use the magnitude of a value to represent one piece of information (like speed of movement per animation frame) and the sign of that number to represent another piece of information (like the direction of that movement).  
-In those applications, as one example, if a variable arrives at zero and it loses its sign, then you would lose the information of what direction it was moving in before it arrived at zero. Preserving the sign of the zero prevents potentially unwanted information loss.
-`
+> There are certain applications where developers use the magnitude of a value to represent one piece of information (like speed of movement per animation frame) and the sign of that number to represent another piece of information (like the direction of that movement).  
+In those applications, as one example, if a variable arrives at zero and it loses its sign, then you would lose the information of what direction it was moving in before it arrived at zero. Preserving the sign of the zero prevents potentially unwanted information loss.`
 
 ## Number object
 ### Structure
@@ -101,15 +99,15 @@ console.dir(Number);
 ![Number object structure](imgs/number-object.png)
 
 ### Properties
-1. Number.POSITIVE_INFINITY  
-2. Number.NEGATIVE_INFINITY  
-3. Number.NaN  
-4. Number.MIN_VALUE  
-5. Number.MAX_VALUE  
-6. Number.MIN_SAFE_INTEGER  
-7. Number.MAX_SAFE_INTEGER   
-8. Number.EPSILON
-9. Number.prototype
+* [Number.POSITIVE_INFINITY](#numbermin_value--numbermax_value--numbermin_safe_integer--numbermax_safe_integer)  
+* [Number.NEGATIVE_INFINITY](#numbermin_value--numbermax_value--numbermin_safe_integer--numbermax_safe_integer)  
+* [Number.NaN](#numbermin_value--numbermax_value--numbermin_safe_integer--numbermax_safe_integer)  
+* Number.MIN_VALUE  
+* Number.MAX_VALUE  
+* Number.MIN_SAFE_INTEGER `*`  
+* Number.MAX_SAFE_INTEGER `*`   
+* Number.EPSILON `*`
+* Number.prototype
 
 표준 프로퍼티들은 상수이다.  
 즉 변경이 불가능하다.  
@@ -126,7 +124,7 @@ console.log(Number.NEGATIVE_INFINITY === -Infinity); // true
 console.log(Number.isNaN(Number.NaN)); // true
 ```
 
-#### Number.MIN_VALUE & Number.MAX_VALUE & Number.MIN_SAFE_INTEGER & Number.MAX_SAFE_INTEGER
+#### Number.MIN_VALUE & Number.MAX_VALUE
 ##### Problem in ES
 [수의 표현범위가 다른 int와 float, 그리고 신뢰할 수 없는 부동소수점](http://slame.tistory.com/2)
 ```javascript
@@ -138,6 +136,7 @@ console.log(Number.MAX_VALUE + 1); // 1.7976931348623157e+308
 console.log(Number.MAX_VALUE + 1 === Number.MAX_VALUE - 1); // true
 ```
 
+#### Number.MIN_SAFE_INTEGER `*` & Number.MAX_SAFE_INTEGER `*`
 ##### Solution in ES6
 [부동 소수점에 대한 이해](http://thrillfighter.tistory.com/349)
 ```javascript
@@ -151,7 +150,7 @@ console.log(Number.MAX_SAFE_INTEGER !== Number.MAX_SAFE_INTEGER - 1); // true
 console.log(Number.MAX_SAFE_INTEGER + 1 === Number.MAX_SAFE_INTEGER + 2); // true
 ```
 
-#### Number.EPSILON
+#### Number.EPSILON `*`
 ##### Problem in ES
 ```javascript
 console.log(.1 + .2); // 0.30000000000000004
@@ -211,18 +210,18 @@ console.log(new Number(12).lastNum()); // 2
 ```
 
 ### Methods
-1. Number.isFinite()  
-2. Number.isInteger()  
-3. Number.isNaN()  
-4. Number.isSafeInteger()  
-5. Number.parseInt()  
-6. Number.parseFloat()  
-7. Number.prototype.toFixed()  
-8. Number.prototype.toPrecision()  
-9. Number.prototype.toExponential()  
-10. Number.prototype.toString()  
-11. Number.prototype.valueOf()
-12. Number.prototype.toLocaleString()
+* Number.isFinite() `*`  
+* Number.isInteger() `*`  
+* Number.isNaN() `*`  
+* Number.isSafeInteger() `*`  
+* Number.parseInt() `*`  
+* Number.parseFloat() `*`  
+* Number.prototype.toFixed()  
+* Number.prototype.toPrecision()  
+* Number.prototype.toExponential()  
+* Number.prototype.toString()  
+* Number.prototype.valueOf()
+* Number.prototype.toLocaleString()
 
 메소드는 수정 가능하다.
 수정 가능하기 때문에 폴리필도 제작 가능하다.

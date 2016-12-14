@@ -48,11 +48,10 @@ console.log(Math.GET_CIRCUMFERENCE(1)); // 6.283185307179586
 ### Methods
 많은 메소드들은 OS, JS 엔진에 의존적이다.  
 브라우저 별로 반환하는 값이 다르며, 같은 JS 엔진을 쓴다 하더라도 OS 별로 다른 값을 반환한다.
-```
-Note that a lot of the math functions have a precision that's implementation-dependent.  
-This means that different browsers can give a different result,  
+> Note that a lot of the math functions have a precision that's implementation-dependent.
+This means that different browsers can give a different result,
 and even the same JS engine on a different OS or architecture can give different results.
-```
+
 
 * [Math.abs(x)](#mathabsx)  
 * [Math.ceil(x)](#mathceilx)  
@@ -201,12 +200,10 @@ console.log(Math.pow(8, -1/3)); // 0.5, 지수에 음수도 사용 가능.
 0~1 사이의 랜덤한 실수를 반환한다.  
 또한 보안에 관련된 부분에 이 메소드를 사용해서는 안된다.  
 보안에 관련해서는 [window.crypto.getRandomValues()](https://developer.mozilla.org/en-US/docs/Web/API/RandomSource/getRandomValues) 메소드를 참고하자.
-```
-Note: Math.random() does not provide cryptographically secure random numbers.  
-Do not use them for anything related to security.  
-Use the Web Crypto API instead,  
+> Note: Math.random() does not provide cryptographically secure random numbers.
+Do not use them for anything related to security.
+Use the Web Crypto API instead,
 and more precisely the window.crypto.getRandomValues() method.
-```
 
 ```javascript
 console.log(Math.random()); // 0.07529863184903185
