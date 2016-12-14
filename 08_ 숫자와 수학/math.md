@@ -54,18 +54,18 @@ This means that different browsers can give a different result,
 and even the same JS engine on a different OS or architecture can give different results.
 ```
 
-* Math.abs(x)  
-* Math.ceil(x)  
-* Math.floor(x)  
-* Math.round(x)  
-* Math.trunc(x) `*`  
-* Math.fround(x) `*`  
-* Math.max([x[, y[, …]]])  
-* Math.min([x[, y[, …]]])  
-* Math.pow(x, y)  
-* Math.random()  
-* Math.sign(x) `*`  
-* Math.acos(x)  
+* [Math.abs(x)](#mathabsx)  
+* [Math.ceil(x)](#mathceilx)  
+* [Math.floor(x)](#mathfloorx)  
+* [Math.round(x)](#mathroundx)  
+* [Math.trunc(x)](#mathtruncx) `*`  
+* [Math.fround(x)](#mathfroundx) `*`  
+* [Math.max(\[x\[, y\[, …\]\]\])](#mathmaxx-y---mathminx-y-)  
+* [Math.min(\[x\[, y\[, …\]\]\])](#mathmaxx-y---mathminx-y-)  
+* [Math.pow(x, y)](#mathpowx-y)  
+* [Math.random()](#mathrandom)  
+* [Math.sign(x)](#mathsignx) `*`  
+* [Math.acos(x)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/acos)  
 Returns the arccosine of a number.  
 * [Math.acosh(x)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/acosh) `*`  
 Returns the hyperbolic arccosine of a number.  
@@ -114,13 +114,13 @@ Returns the tangent of a number.
 * [Math.tanh(x)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/tanh) `*`  
 Returns the hyperbolic tangent of a number.  
 
-#### Math.abs(x)
+#### [Math.abs(x)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs)
 Math.abs(x) = |x|
 ```javascript
 console.log(Math.abs(-1) === Math.abs(1)); // 1 === 1
 ```
 
-#### Math.ceil(x)
+#### [Math.ceil(x)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/ceil)
 무조건 소수점 첫째 자리에서 올림하여 정수를 반환.
 ```javascript
 console.log(Math.ceil(1)); // 1
@@ -129,7 +129,7 @@ console.log(Math.ceil(-0)); // -0
 console.log(Math.ceil(-2.00001)); // -2
 ```
 
-#### Math.floor(x)
+#### [Math.floor(x)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/floor)
 무조건 소수점 첫째 자리에서 내림하여 정수를 반환.
 ```javascript
 console.log(Math.ceil(1)); // 1
@@ -138,7 +138,7 @@ console.log(Math.ceil(-0)); // -0
 console.log(Math.ceil("-2.00001")); // -3
 ```
 
-#### Math.round(x)
+#### [Math.round(x)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round)
 소수점 첫째 자리에서 반올림하여 정수를 반환.
 ```javascript
 console.log(Math.round(1.1)); // 1
@@ -148,7 +148,7 @@ console.log(Math.round("-0.5")); // -0
 console.log(Math.round(-0.6)); // -1
 ```
 
-#### Math.trunc
+#### [Math.trunc](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/trunc)
 소수점을 제외한 정수부만을 반환.
 ```javascript
 console.log(Math.trunc(1)); // 1
@@ -164,7 +164,7 @@ Math.trunc = Math.trunc || function(x) {
 }
 ```
 
-#### Math.fround(x)
+#### [Math.fround(x)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/fround)
 가장 근사한 [Single-precision floating-point format](https://en.wikipedia.org/wiki/Single-precision_floating-point_format)을 반환.  
 ```javascript
 console.log(0.1 + 0.2); //0.30000000000000004
@@ -180,7 +180,7 @@ Math.fround = Math.fround || (function (array) {
 })(Float32Array(1));
 ```
 
-#### Math.max([x[, y[, …]]]) & Math.min([x[, y[, …]]]) 
+#### [Math.max(\[x\[, y\[, …\]\]\])](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max) & [Math.min(\[x\[, y\[, …\]\]\])](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/min) 
 ```javascript
 console.log(Math.max(0, -0)); // 0
 console.log(Math.min(0, -0)); // -0
@@ -189,7 +189,7 @@ console.log(Math.min()); // Infinity
 console.log(Math.max('a', 'b')); // NaN
 ```
 
-#### Math.pow(x, y)
+#### [Math.pow(x, y)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/pow)
 ```javascript
 console.log(Math.pow(2, 3)); // 8
 console.log(Math.pow(4, 0.5)); // 2, 루트 2와 같음.
@@ -197,7 +197,7 @@ console.log(Math.pow(8, 1/3)); // 2, 세제곱근과 같음.
 console.log(Math.pow(8, -1/3)); // 0.5, 지수에 음수도 사용 가능.
 ```
 
-#### Math.random()
+#### [Math.random()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random)
 0~1 사이의 랜덤한 실수를 반환한다.  
 또한 보안에 관련된 부분에 이 메소드를 사용해서는 안된다.  
 보안에 관련해서는 [window.crypto.getRandomValues()](https://developer.mozilla.org/en-US/docs/Web/API/RandomSource/getRandomValues) 메소드를 참고하자.
@@ -223,7 +223,7 @@ Object.defineProperty(Math, "getRandomRange", {
 console.log(Math.getRandomRange(1, 2));
 ```
 
-#### Math.sign(x)
+#### [Math.sign(x)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sign)
 매개 변수의 부호를 반환.
 ```javascript
 console.log(Math.sign(3)); //  1
