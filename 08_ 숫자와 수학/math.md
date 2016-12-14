@@ -148,7 +148,7 @@ console.log(Math.round("-0.5")); // -0
 console.log(Math.round(-0.6)); // -1
 ```
 
-#### [Math.trunc](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/trunc)
+#### [Math.trunc(x)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/trunc) `*`
 소수점을 제외한 정수부만을 반환.
 ```javascript
 console.log(Math.trunc(1)); // 1
