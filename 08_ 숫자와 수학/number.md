@@ -99,9 +99,9 @@ console.dir(Number);
 ![Number object structure](imgs/number-object.png)
 
 ### Properties
-* [Number.POSITIVE_INFINITY](#numbermin_value--numbermax_value--numbermin_safe_integer--numbermax_safe_integer)  
-* [Number.NEGATIVE_INFINITY](#numbermin_value--numbermax_value--numbermin_safe_integer--numbermax_safe_integer)  
-* [Number.NaN](#numbermin_value--numbermax_value--numbermin_safe_integer--numbermax_safe_integer)  
+* [Number.POSITIVE_INFINITY](#numberpositive_infinity--numbernegative_infinity--numbernan)  
+* [Number.NEGATIVE_INFINITY](#numberpositive_infinity--numbernegative_infinity--numbernan)  
+* [Number.NaN](#numberpositive_infinity--numbernegative_infinity--numbernan)  
 * [Number.MIN_VALUE](#numbermin_value--numbermax_value)  
 * [Number.MAX_VALUE](#numbermin_value--numbermax_value)  
 * [Number.MIN_SAFE_INTEGER](#numbermin_safe_integer---numbermax_safe_integer-) `*`  
@@ -475,7 +475,7 @@ console.log(new Number(0b11).valueOf()); // 3
 console.log(new Number({}).valueOf()); // NaN
 ```
 
-##### [Number.prototype.toLocaleString](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString)
+##### [Number.prototype.toLocaleString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString)
 ###### Syntax
 ```javascript
 Number.prototype.toLocaleString([locales [, options]]);
@@ -490,7 +490,8 @@ language[-script][-region]\*(-variant)\*(-extension)[-privateuse]
 2. Options  
 style: "currency", "percent", "decimal"(default)  
 currency: [Current currency & funds code list](http://www.currency-iso.org/en/home/tables/table-a1.html)  
-"USD", "EUR", "KRW", "JPY", "CNY", etc.
+"USD", "EUR", "KRW", "JPY", "CNY", etc.  
+etc options.
 
 ###### Checking for support
 ```javascript
