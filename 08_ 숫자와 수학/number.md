@@ -102,12 +102,12 @@ console.dir(Number);
 * [Number.POSITIVE_INFINITY](#numbermin_value--numbermax_value--numbermin_safe_integer--numbermax_safe_integer)  
 * [Number.NEGATIVE_INFINITY](#numbermin_value--numbermax_value--numbermin_safe_integer--numbermax_safe_integer)  
 * [Number.NaN](#numbermin_value--numbermax_value--numbermin_safe_integer--numbermax_safe_integer)  
-* Number.MIN_VALUE  
-* Number.MAX_VALUE  
-* Number.MIN_SAFE_INTEGER `*`  
-* Number.MAX_SAFE_INTEGER `*`   
-* Number.EPSILON `*`
-* Number.prototype
+* [Number.MIN_VALUE](#numbermin_value--numbermax_value)  
+* [Number.MAX_VALUE](#numbermin_value--numbermax_value)  
+* [Number.MIN_SAFE_INTEGER](#numbermin_safe_integer---numbermax_safe_integer-) `*`  
+* [Number.MAX_SAFE_INTEGER](#numbermin_safe_integer---numbermax_safe_integer-) `*`   
+* [Number.EPSILON](#numberepsilon-) `*`
+* [Number.prototype](#numberprototype)
 
 표준 프로퍼티들은 상수이다.  
 즉 변경이 불가능하다.  
@@ -117,14 +117,14 @@ Number.EPSILON = "asdf"; // 오류는 나지 않는다.
 console.log(Number.EPSILON); // 2.220446049250313e-16
 ```
 
-#### Number.POSITIVE_INFINITY & Number.NEGATIVE_INFINITY & Number.NaN
+#### [Number.POSITIVE_INFINITY](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/POSITIVE_INFINITY) & [Number.NEGATIVE_INFINITY](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/NEGATIVE_INFINITY) & [Number.NaN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/NaN)
 ```javascript
 console.log(Number.POSITIVE_INFINITY === Infinity); // true
 console.log(Number.NEGATIVE_INFINITY === -Infinity); // true
 console.log(Number.isNaN(Number.NaN)); // true
 ```
 
-#### Number.MIN_VALUE & Number.MAX_VALUE
+#### [Number.MIN_VALUE](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MIN_VALUE) & [Number.MAX_VALUE](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_VALUE)
 ##### Problem in ES
 [수의 표현범위가 다른 int와 float, 그리고 신뢰할 수 없는 부동소수점](http://slame.tistory.com/2)
 ```javascript
@@ -136,7 +136,7 @@ console.log(Number.MAX_VALUE + 1); // 1.7976931348623157e+308
 console.log(Number.MAX_VALUE + 1 === Number.MAX_VALUE - 1); // true
 ```
 
-#### Number.MIN_SAFE_INTEGER `*` & Number.MAX_SAFE_INTEGER `*`
+#### [Number.MIN_SAFE_INTEGER](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MIN_SAFE_INTEGER) `*` & [Number.MAX_SAFE_INTEGER `*`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER)
 ##### Solution in ES6
 [부동 소수점에 대한 이해](http://thrillfighter.tistory.com/349)
 ```javascript
@@ -150,7 +150,7 @@ console.log(Number.MAX_SAFE_INTEGER !== Number.MAX_SAFE_INTEGER - 1); // true
 console.log(Number.MAX_SAFE_INTEGER + 1 === Number.MAX_SAFE_INTEGER + 2); // true
 ```
 
-#### Number.EPSILON `*`
+#### [Number.EPSILON](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/EPSILON) `*`
 ##### Problem in ES
 ```javascript
 console.log(.1 + .2); // 0.30000000000000004
@@ -199,7 +199,7 @@ console.log(isEqual(0.1 + 1 - 2.2, -1.1)); // true
 console.log(isEqual(0.1 + 1 - 2.2, -1.2)); // false
 ```
 
-#### Number.prototype
+#### [Number.prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/prototype)
 숫자가 상속받는 프로퍼티와 메소들을 정의해놓은 프로퍼티이다.  
 표준 메소드 및 프로퍼티가 미리 정의돼있으며, 사용자가 직접 정의하려면 아래와 같이 하면 된다.
 ```javascript
@@ -210,18 +210,18 @@ console.log(new Number(12).lastNum()); // 2
 ```
 
 ### Methods
-* Number.isFinite() `*`  
-* Number.isInteger() `*`  
-* Number.isNaN() `*`  
-* Number.isSafeInteger() `*`  
-* Number.parseInt() `*`  
-* Number.parseFloat() `*`  
-* Number.prototype.toFixed()  
-* Number.prototype.toPrecision()  
-* Number.prototype.toExponential()  
-* Number.prototype.toString()  
-* Number.prototype.valueOf()
-* Number.prototype.toLocaleString()
+* [Number.isFinite()](#numberisfinite-) `*`  
+* [Number.isInteger()](#numberisinteger-) `*`  
+* [Number.isNaN()](#numberisnan-) `*`  
+* [Number.isSafeInteger()](#numberissafeinteger-) `*`  
+* [Number.parseInt()](#numberparseint-) `*`  
+* [Number.parseFloat()](#numberparsefloat-) `*`  
+* [Number.prototype.toFixed()](#numberprototypetofixed--numberprototypetoprecision)  
+* [Number.prototype.toPrecision()](#numberprototypetofixed--numberprototypetoprecision)  
+* [Number.prototype.toExponential()](#numberprototypetoexponential)  
+* [Number.prototype.toString()](#numberprototypetostring)  
+* [Number.prototype.valueOf()](#numberprototypevalueof)
+* [Number.prototype.toLocaleString()](#numberprototypetolocalestring)
 
 메소드는 수정 가능하다.
 수정 가능하기 때문에 폴리필도 제작 가능하다.
@@ -230,7 +230,7 @@ Number.isFinite = () => "a";
 console.log(Number.isFinite(123)); // "a"
 ```
 
-##### Number.isFinite()
+##### [Number.isFinite()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isFinite) `*`
 ###### in ES
 ```javascript
 console.log(isFinite(0)); // true
@@ -268,7 +268,7 @@ Number.isFinite = Number.isFinite || function(value) {
 }
 ```
 
-##### Number.isInteger()
+##### [Number.isInteger()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isInteger) `*`
 ```javascript
 console.log(Number.isInteger(0)); // true
 console.log(Number.isInteger(255)); // true
@@ -293,7 +293,7 @@ Number.isInteger = Number.isInteger || function(value) {
 };
 ```
 
-##### Number.isNaN()
+##### [Number.isNaN()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isNaN) `*`
 ###### Problem
 ```javascript
 console.log(NaN === NaN); // false
@@ -343,7 +343,7 @@ Number.isNaN = Number.isNaN || function(value) {
 };
 ```
 
-##### Number.isSafeInteger()
+##### [Number.isSafeInteger()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isSafeInteger) `*`
 ```javascript
 console.log(Number.isSafeInteger(3)); // true
 console.log(Number.isSafeInteger(Math.pow(2, 53))); // false
@@ -362,7 +362,7 @@ Number.isSafeInteger = Number.isSafeInteger || function (value) {
 };
 ```
 
-##### Number.parseInt()
+##### [Number.parseInt()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/parseInt) `*`
 ###### Syntax
 ```javascript
 Number.parseInt(string[, radix])
@@ -413,7 +413,7 @@ console.log(+"0o10"); // 8
 Number.parseInt = Number.parseInt || parseInt;
 ```
 
-##### Number.parseFloat()
+##### [Number.parseFloat()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/parseFloat) `*`
 ```javascript
 console.log(Number.parseFloat === parseFloat); // true
 console.log(Number.parseFloat("11")); // 11
@@ -434,7 +434,7 @@ console.log(Number.parseFloat(new Date())); // NaN
 Number.parseFloat = Number.parseFloat || parseFloat;
 ```
 
-##### Number.prototype.toFixed() & Number.prototype.toPrecision()
+##### [Number.prototype.toFixed()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed) & [Number.prototype.toPrecision()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toPrecision)
 실수를 반올림 할 때 쓰인다.
 ```javascript
 const num = 123.45678;
@@ -445,7 +445,7 @@ console.log(num.toFixed(4)); // "123.4568"
 console.log(num.toPrecision(4)); // "123.5"
 ```
 
-##### Number.prototype.toExponential
+##### [Number.prototype.toExponential](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toExponential)
 숫자를 지수를 통해 표현할 때 쓰인다.
 ```javascript
 let num = 7817.1278;
@@ -455,7 +455,7 @@ console.log(num.toExponential(6)); // "7.817128e+3"
 num = 0.1445;
 console.log(num.toExponential()); // "1.445e-1"
 ```
-##### Number.prototype.toString()
+##### [Number.prototype.toString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toString)
 숫자를 문자열로 바꿀 때 쓰인다.
 ```javascript
 console.log(1.1.toString()); // "1.1"
@@ -467,7 +467,7 @@ console.log(-Infinity.toString()); // -Infinity
 console.log(0.0.toString()); // "0"
 ```
 
-##### Number.prototype.valueOf()
+##### [Number.prototype.valueOf()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/valueOf)
 숫자 객체의 인스턴스에서 숫자값을 얻어올 때 쓰인다.
 ```javascript
 console.log(new Number(11).valueOf()); // 11
@@ -475,7 +475,7 @@ console.log(new Number(0b11).valueOf()); // 3
 console.log(new Number({}).valueOf()); // NaN
 ```
 
-##### Number.prototype.toLocaleString
+##### [Number.prototype.toLocaleString](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString)
 ###### Syntax
 ```javascript
 Number.prototype.toLocaleString([locales [, options]]);

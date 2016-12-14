@@ -7,12 +7,12 @@
 수학식: 11<sub>(2)</sub>  
 프로그래밍 언어: 0b11, 0B11
 
-**in ES5**
+**in ES**
 ```javascript
 console.log(parseInt('11', 2)); // 3
 ```
 
-**in ES6**
+**in ES6*
 ```javascript
 console.log(0b11); // 3
 console.log(0B11); // 3
@@ -22,7 +22,7 @@ console.log(0B11); // 3
 수학식: 71<sub>(8)</sub>  
 프로그래밍 언어: 071
 
-**in ES5**
+**in ES**
 ```javascript
 console.log(071); // 57
 ```
