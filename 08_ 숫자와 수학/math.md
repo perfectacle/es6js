@@ -58,13 +58,13 @@ and even the same JS engine on a different OS or architecture can give different
 * [Math.ceil(x)](#mathceilx)  
 * [Math.floor(x)](#mathfloorx)  
 * [Math.round(x)](#mathroundx)  
-* [Math.trunc(x)](#mathtruncx) `*`  
-* [Math.fround(x)](#mathfroundx) `*`  
+* [Math.trunc(x)](#mathtruncx-) `*`  
+* [Math.fround(x)](#mathfroundx-) `*`  
 * [Math.max(\[x\[, y\[, …\]\]\])](#mathmaxx-y---mathminx-y-)  
 * [Math.min(\[x\[, y\[, …\]\]\])](#mathmaxx-y---mathminx-y-)  
 * [Math.pow(x, y)](#mathpowx-y)  
 * [Math.random()](#mathrandom)  
-* [Math.sign(x)](#mathsignx) `*`  
+* [Math.sign(x)](#mathsignx-) `*`  
 * [Math.acos(x)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/acos)  
 Returns the arccosine of a number.  
 * [Math.acosh(x)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/acosh) `*`  
@@ -164,7 +164,7 @@ Math.trunc = Math.trunc || function(x) {
 }
 ```
 
-#### [Math.fround(x)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/fround)
+#### [Math.fround(x)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/fround) `*`
 가장 근사한 [Single-precision floating-point format](https://en.wikipedia.org/wiki/Single-precision_floating-point_format)을 반환.  
 ```javascript
 console.log(0.1 + 0.2); //0.30000000000000004
@@ -223,7 +223,7 @@ Object.defineProperty(Math, "getRandomRange", {
 console.log(Math.getRandomRange(1, 2));
 ```
 
-#### [Math.sign(x)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sign)
+#### [Math.sign(x)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sign) `*`
 매개 변수의 부호를 반환.
 ```javascript
 console.log(Math.sign(3)); //  1
